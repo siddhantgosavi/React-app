@@ -1,0 +1,5 @@
+(1) install form validator
+(2) install sass
+(3)implement routing in application
+(4)more common functions in utils files
+(5) API Calls

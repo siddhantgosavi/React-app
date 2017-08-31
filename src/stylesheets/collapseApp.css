@@ -1,0 +1,9 @@
+.expanded .collapseBody {
+  display: block;
+}
+.collapseContainer {
+  width: 500px;
+  padding: 50px;
+  background-color: #66CCFF;
+  margin: 0 auto;
+}
