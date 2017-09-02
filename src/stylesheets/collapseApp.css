@@ -7,3 +7,15 @@
   background-color: #66CCFF;
   margin: 0 auto;
 }
+.collapseHead {
+  margin-bottom: 10px;
+}
+.collapseHead h2 {
+  font-size: 40px;
+  line-height: 42px;
+  color: #4a669e;
+}
+.collapseBody p {
+  color: #2f2f2f;
+  font-size: 18px;
+}

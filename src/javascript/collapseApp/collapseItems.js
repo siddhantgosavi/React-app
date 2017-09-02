@@ -11,8 +11,6 @@ export default class CollapseItem extends React.Component {
     }
 
     toggleContent(refName, event) {
-        // event.preventDefault();
-        // console.log(this.refs[refName])
         this.setState({
             isExpanded: !this.state.isExpanded,
         });
