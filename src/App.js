@@ -9,34 +9,41 @@ class App extends React.Component {
 
     constructor() {
         super();
-        this.getChoice = this.getChoice.bind(this);
+        this.state = {
+            stateName: '',
+        };
     }
 
-    getChoice (refName, event) {
-        let list = document.getElementsByClassName('component');
-        for(let i = 0; i < list.length ; i++) {
-            list[i].classList.add('hide');
+
+    getSubComponent (componentName) {
+        let defaultTemplate =  ( <CollapseAppIndex /> );
+        switch (componentName) {
+            case 'collapseIndex':
+                return defaultTemplate;
+            case 'jsonIndex':
+                return ( <JsonIndex /> );
+            case 'todoIndex':
+                return ( <TodoIndex /> );
+            default:
+                return defaultTemplate;
         }
-        this.refs[refName].classList.remove('hide');
+    }
+
+    getChoice(name) {
+        this.setState({
+            stateName: name
+        })
     }
 
     render() {
         return (
             <div className="App">
                 <ul className="stickyLeftlist">
-                    <li><a onClick={this.getChoice.bind(this, 'one')}>1.Collapse App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'two')}>2.JSon App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'three')}>3.TodoApp</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'collapseIndex')}>1.Collapse App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>2.JSon App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>3.TodoApp</a></li>
                 </ul>
-                <div className="component" ref='one'>
-                    <CollapseAppIndex />
-                </div>
-                <div className="component hide" ref='two'>
-                    <JsonIndex />
-                </div>
-                <div className="component hide" ref='three'>
-                    <TodoIndex />
-                </div>
+                <div className="component">{this.getSubComponent(this.state.stateName)}</div>
             </div>
         );
   }
