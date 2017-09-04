@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import './stylesheets/custom.css';
+import Header from './javascript/components/header.js';
 import CollapseAppIndex from './javascript/containers/collapseAppIndex.js';
 import JsonIndex from './javascript/containers/jsonIndex.js';
 import TodoIndex from './javascript/containers/todoIndex.js';
@@ -17,16 +18,34 @@ class App extends React.Component {
 
 
     getSubComponent (componentName) {
-        let defaultTemplate =  ( <CollapseAppIndex /> );
+        let defaultTemplate = (<div>
+                                  <Header headerText="Collapse APP" />
+                                  <CollapseAppIndex />
+                               </div>
+                              );
         switch (componentName) {
-            case 'collapseIndex':
-                return defaultTemplate;
             case 'jsonIndex':
-                return <JsonIndex />;
+                return (
+                    <div>
+                        <Header headerText="Json Read App" />
+                        <JsonIndex />
+                    </div>
+                );
             case 'todoIndex':
-                return <TodoIndex />;
+                return (
+                    <div>
+                        <Header headerText="To Do App" />
+                        <TodoIndex />
+                    </div>
+                );
             case 'fetchDataIndex':
-                return <FetchDataIndex />;
+                return (
+                    <div>
+                        <Header headerText="fetch data APP" />
+                        <FetchDataIndex />
+                    </div>
+                );
+            case 'collapseIndex':
             default:
                 return defaultTemplate;
         }
@@ -47,7 +66,7 @@ class App extends React.Component {
                     <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>3.TodoApp</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>3.Fetch Data app</a></li>
                 </ul>
-                <div className="component">{this.getSubComponent(this.state.stateName)}</div>
+                {this.getSubComponent(this.state.stateName)}
             </div>
         );
   }
