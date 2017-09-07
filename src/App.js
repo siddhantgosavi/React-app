@@ -6,6 +6,7 @@ import CollapseAppIndex from './javascript/containers/collapseAppIndex.js';
 import JsonIndex from './javascript/containers/jsonIndex.js';
 import TodoIndex from './javascript/containers/todoIndex.js';
 import FetchDataIndex from './javascript/containers/fetchDataIndex.js';
+import CurrencyConvertIndex from './javascript/containers/currencyIndex.js';
 
 class App extends React.Component {
 
@@ -45,9 +46,21 @@ class App extends React.Component {
                         <FetchDataIndex />
                     </div>
                 );
+            case 'currencyConvertIndex':
+                return (
+                    <div>
+                        <Header headerText="Currency Converter" />
+                        <CurrencyConvertIndex />
+                    </div>
+                );
             case 'collapseIndex':
             default:
-                return defaultTemplate;
+            return (
+                <div>
+                    <Header headerText="Currency Converter" />
+                    <CurrencyConvertIndex />
+                </div>
+            );
         }
     }
 
@@ -61,10 +74,11 @@ class App extends React.Component {
         return (
             <div className="App">
                 <ul className="stickyLeftlist">
-                    <li><a onClick={this.getChoice.bind(this, 'collapseIndex')}>1.Collapse App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>2.JSon App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>3.TodoApp</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>3.Fetch Data app</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'collapseIndex')}>(1)Collapse App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>(2)JSon App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>(3)TodoApp</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(4)Fetch Data app</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(5)Currency Converter</a></li>
                 </ul>
                 {this.getSubComponent(this.state.stateName)}
             </div>
