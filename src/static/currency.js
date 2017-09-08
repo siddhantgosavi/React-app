@@ -35,6 +35,12 @@ const data = {
             "sellRate": .5472,
             "name": "British Pounds Sterling",
             "sign": "£"
+        },
+        {
+            "code": "INR",
+            "sellRate": 8,
+            "name": "Indian Currency",
+            "sign": "R"
         }
     ]
 }
