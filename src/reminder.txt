@@ -3,3 +3,5 @@
 (3)implement routing in application
 (4)more common functions in utils files
 (5) API Calls
+(6)move common strings to messages.js
+(7)read about json methods

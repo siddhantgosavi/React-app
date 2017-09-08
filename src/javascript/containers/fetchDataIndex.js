@@ -1,16 +1,17 @@
 import React from 'react';
 import Header from '../components/header.js';
-import CollapseComponent from '../collapseApp/collapse.js';
+import UserIndex from '../fetchDataApp/userIndex.js';
 
 export default class Index extends React.Component {
+
     render() {
       return (
           <div>
-              <Header headerText="Collapse APP" />
+              <Header headerText="fetch data APP" />
               <div className='ChildElement'>
-                  <CollapseComponent />
+                  <UserIndex />
               </div>
           </div>
       );
     }
-  }
+}
