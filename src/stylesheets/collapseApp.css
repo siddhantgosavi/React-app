@@ -1,6 +1,11 @@
+.collapseWrapper .collapseBody,.hidden {
+  display: none;
+}
+
 .expanded .collapseBody {
   display: block;
 }
+
 .collapseContainer {
   width: 500px;
   padding: 50px;

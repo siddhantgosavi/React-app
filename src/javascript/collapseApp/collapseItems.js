@@ -8,9 +8,10 @@ export default class CollapseItem extends React.Component {
         this.state = {
             isExpanded: false,
         };
+        this.toggleContent = this.toggleContent.bind(this);
     }
 
-    toggleContent(refName, event) {
+    toggleContent() {
         this.setState({
             isExpanded: !this.state.isExpanded,
         });
@@ -19,11 +20,11 @@ export default class CollapseItem extends React.Component {
     render() {
         let {title, description} = this.props;
         return (
-            <li className={`collapseWrapper showCursor ${this.state.isExpanded ? 'expanded' : ''}`} onClick={this.toggleContent.bind(this, 'content')}>
+            <li className={`collapseWrapper showCursor ${this.state.isExpanded ? 'expanded' : ''}`} onClick={this.toggleContent}>
                 <div className="collapseHead">
                     <h2>{title}</h2>
                 </div>
-                <div ref='content' className="collapseBody hide">
+                <div ref='content' className="collapseBody">
                     <p>{description}</p>
                 </div>
             </li>
