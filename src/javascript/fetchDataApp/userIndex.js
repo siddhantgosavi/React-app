@@ -31,7 +31,13 @@ export default class UserIndex extends React.Component {
 
     fetchUserData() {
         fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb')
-        .then(response => response.json()) //turn response to json
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json()
+          }
+
+          throw new Error('Response not 200');
+        }) //turn response to json
         .then(parsedJson => this.setState({
             result: parsedJson.results,  //getting the response and assigning it to userdata array
             isLoading: false,
