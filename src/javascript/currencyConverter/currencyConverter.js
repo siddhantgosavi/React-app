@@ -23,6 +23,17 @@ export default class  CurrencyConverter extends React.Component {
         });
     }
 
+    hanldeInputChange(choice) {
+      const { firstCurrency, secondCurrency } = this.state;
+      let input = this.refs[choice].value;
+      console.log(input * secondCurrency.sellRate);
+        // if(choice === 'firstInput') {
+        //     console.log(value * 2);
+        // } else {
+        //   console.log(input);
+        // }
+    }
+
     render() {
         const { currencyData, firstCurrency, secondCurrency } = this.state;
         return (
@@ -34,7 +45,7 @@ export default class  CurrencyConverter extends React.Component {
                         <h3>{firstCurrency.name}</h3>
                         <div className="input-group">
                             <span className="input-group-addon">$</span>
-                            <input type="number" step="1" className="form-control"/>
+                            <input type="number" ref='firstInput' step="1" className="form-control" onChange={this.hanldeInputChange.bind(this, 'firstInput')} />
                             <span className="input-group-addon">{firstCurrency.code}</span>
                         </div>
                     </div>
@@ -42,7 +53,7 @@ export default class  CurrencyConverter extends React.Component {
                         <h3>{secondCurrency.name}</h3>
                         <div className="input-group">
                             <span className="input-group-addon">$</span>
-                            <input type="number" step="1" className="form-control" />
+                            <input type="number" ref='secondInput' step="1" className="form-control" onChange={this.hanldeInputChange.bind(this, 'secondInput')} />
                             <span className="input-group-addon">{secondCurrency.code}</span>
                         </div>
                     </div>
