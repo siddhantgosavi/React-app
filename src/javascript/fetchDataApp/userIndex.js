@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../stylesheets/collapseApp.css';
 import UserData from './userData.js';
+import { fetch } from '../utils/restUtils';
+
 var underscore = require('underscore');
 
 export default class UserIndex extends React.Component {
@@ -8,53 +10,33 @@ export default class UserIndex extends React.Component {
         super();
         this.state={
             isLoading: false,
-            result: [],
-            requestErrorMsg: ''
+            userDetails: [],
+            errorMessage: ''
         };
         this.fetchUserData = this.fetchUserData.bind(this);
-    }
-
-    componentWillMount() {
-        localStorage.getItem('contact') && this.setState({
-            result: JSON.parse(localStorage.getItem('contact')), //if exist in local storage set it to result array
-            isLoading: false,
-        });
-    }
-
-    componentDidMount() {
-        if(underscore.isEmpty(localStorage.getItem('contact'))) { //fetch only if data does not exist on local storage
-            this.fetchUserData();
-        } else {
-            console.log('fetching data from local storage');
-        }
+        this.successHandler = this.successHandler.bind(this);
+        this.errorHandler = this.errorHandler.bind(this);
     }
 
     fetchUserData() {
-        fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb')
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json()
-          }
-
-          throw new Error('Response not 200');
-        }) //turn response to json
-        .then(parsedJson => this.setState({
-            result: parsedJson.results,  //getting the response and assigning it to userdata array
-            isLoading: false,
-        }))
-        .catch(error => this.setState({
-            requestErrorMsg: error.responseJSON,
-        })) //for error handling
+        fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb', this.successHandler, this.errorHandler);
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        localStorage.setItem('contact', JSON.stringify(nextState.result)); //using localStorage to save the api response
-        localStorage.setItem('time', Date.now());
+    successHandler (result) {
+        this.setState({
+            userDetails: result.results,
+        })
+    }
+
+    errorHandler (error) {
+        this.setState({
+            errorMessage: error ? error.description : 'Error fetching data.'
+        })
     }
 
     render() {
-        const {isLoading, result, requestErrorMsg} = this.state;
-        let userData = underscore.map(result, (user, key) => { //modifying the result according to html requirement
+        const {isLoading, userDetails, errorMessage} = this.state;
+        let userInfo = underscore.map(userDetails, (user, key) => { //modifying the result according to html requirement
             return (
                 {
                   name: `${user.name.title}. ${user.name.first} ${user.name.last}`,
@@ -67,12 +49,12 @@ export default class UserIndex extends React.Component {
         return (
             <div className={`content ${isLoading ? 'isLoading' : ''}`}>
                 <a className="btn btnBlue" onClick={this.fetchUserData}>fetch data</a>
-                {requestErrorMsg
-                    ? <div>{requestErrorMsg}</div>
+                {errorMessage
+                    ? <div>{errorMessage}</div>
                     : null
                 }
-                {!isLoading && result.length
-                    ? <UserData userDetails={userData} />
+                {!isLoading && userDetails.length
+                    ? <UserData userDetails={userInfo} />
                     : null
                 }
                 <div className="loader">
