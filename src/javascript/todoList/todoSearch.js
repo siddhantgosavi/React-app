@@ -12,8 +12,20 @@ export default class TodoSearch extends React.Component {
         this.props.searchItem(this.refs.searchText.value);
     }
 
+    getSearchList() {
+        let searchData = this.props.searchList;
+        let defaultTemplate = <p>no result.</p>
+        if(searchData.length) {
+            defaultTemplate = underscore.map(searchData, (task, key) => {
+                return (
+                    <p key={key}>task::{task.userInput}</p>
+                )}
+            );
+        }
+        return defaultTemplate;
+    }
+
     render() {
-       let searchData = this.props.searchList;
         return (
             <div>
                 <div>
@@ -23,13 +35,9 @@ export default class TodoSearch extends React.Component {
                         onChange={this.handleInputChange}
                     />
                 </div>
-                <div>
-                    {underscore.map(searchData, (task, key) => {
-                        return (
-                            <p key={key}>task::{task.userInput}</p>
-                        )}
-                    )}
-                </div>
+                 <div>
+                      {this.getSearchList()}
+                  </div>
             </div>
         );
   }
