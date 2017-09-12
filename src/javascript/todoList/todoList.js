@@ -5,19 +5,19 @@ import '../../stylesheets/todolist.css';
 var underscore = require('underscore');
 
 export default class TodoList extends React.Component {
-  // how to delete the user entered list(there is some problem only one entry is deleted)
-  //validation on input
     constructor() {
         super();
-        this.validateForm = this.validateForm.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
         this.handleInputFocus = this.handleInputFocus.bind(this);
         this.handleInputBlur = this.handleInputBlur.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.addItem = this.addItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
         this.searchItem = this.searchItem.bind(this);
         this.state = {
             oldList: [],
             addbuttonStatus: false,
             searchList: [],
+            requserrorMsg: false,
         };
     }
 
@@ -44,49 +44,50 @@ export default class TodoList extends React.Component {
         return true;
     }
 
-    handleSubmit(event,refName) {
+    addItem(event) {
         event.preventDefault();
-        let noteText = this.refs.input.value
-        let result = this.state.oldList;
-        if(noteText) {
-            result.push({
-                userInput: noteText,
-            });
+        let noteText = this.refs.input.value.toLowerCase() // user input value
+        let result = this.state.oldList; //getting old list
+        let duplicateEntry = underscore.contains(underscore.pluck(result, 'userInput') , noteText); //check for duplicate value
+        if(noteText && !duplicateEntry) {
+            result.push({userInput:noteText});
             this.setState({
                 oldList: result,
-            })
+                requserrorMsg: false,
+            });
+        } else {
+            this.setState({
+                requserrorMsg: true,
+            });
         }
           this.refs.input.value="";
     }
 
-    deleteItem (deleteItemId) {
+    deleteItem (deleteItemId) { //delete item id
         let result = this.state.oldList;
-        result.splice(deleteItemId, 1);
+        result.splice(deleteItemId, 1); //remove id from array
         this.setState({
-            oldList: result, //passing new array
+            oldList: result, //re render the Component
         });
     }
 
     handleInputFocus(refName) {
-        this.refs[refName].classList.remove("hide");
+        this.refs[refName].classList.remove("hide"); //show floating label on input focus
     }
 
     handleInputBlur(refName) {
-        this.refs[refName].classList.add("hide");
+        this.refs[refName].classList.add("hide"); // hide floating label on input blur
     }
 
-    searchItem (searchText) {
-        if(underscore.isEmpty(searchText) || !isNaN(searchText)) {
-            console.log("invalid");
-        } else {
-              let result = underscore.filter(this.state.oldList , (task, key) => {
-                  if(searchText.indexOf(task.userInput) > -1) {
-                      return task;
-                  }
-              });
-              this.setState({
-                  searchList: result,
-              });
+    searchItem(value) {
+        let result = this.state.oldList;
+        result = underscore.filter(result, (task, key) => {
+            return (task.userInput.toLowerCase().search(value.toLowerCase()) > -1); // return value if its in the list
+        });
+        if(result) {
+            this.setState({
+                searchList: result
+            });
         }
     }
 
@@ -94,7 +95,7 @@ export default class TodoList extends React.Component {
         let oldList = this.state.oldList;
         return (
             <div className="container">
-                <form className="todoListForm" onSubmit={this.handleSubmit.bind(this)}>
+                <form className="todoListForm" onSubmit={this.addItem}>
                     <h3>{oldList.length} task to show </h3>
                     <div className="clearFloat">
                         <div className="floatLeft">
