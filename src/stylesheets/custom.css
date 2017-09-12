@@ -41,10 +41,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-.container {
-  width : 1170px;
-  margin: 0 auto;
-}
 .hide{
   display: none;
 }
@@ -88,6 +84,44 @@ input[placeholder]:focus::-webkit-input-placeholder,textarea[placeholder]:focus:
 .redButton:hover {
   background-color: white;
 }
+/*navigation dots css*/
+.navigationDotsWrap {
+  list-style-type: none;
+  text-align: center;
+  margin-bottom: 35px;
+  padding: 0;
+}
+.navigationDotsWrap  li {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 1px solid lightGrey;
+  position: relative;
+  margin-left: 55px;
+	background-color: white;
+}
+.navigationDotsWrap li:first-child {
+  margin-left: 0
+}
+.navigationDotsWrap li:first-child::before {
+  display: none;
+}
+.navigationDotsWrap li::before {
+  content: '';
+  height: 1px;
+  width: 55px;
+  position: absolute;
+  top: 50%;
+  left: -56px;
+  display: inline-block;
+  background: lightGrey;
+}
+.navigationDotsWrap li.activeTab {
+	background: #4a669e;
+	border-color: #4a669e;
+}
+
 header {
   font-size: 32px;
   line-height: 48px;
@@ -218,4 +252,8 @@ header {
 }
 .exchangeRateWrap {
 	margin-top: 60px;
+}
+.currencyConverterWrap {
+	width: 500px;
+	margin: 0 auto;
 }

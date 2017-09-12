@@ -15,16 +15,35 @@ export default class  CurrencyConverter extends React.Component {
     }
 
     handleSelectCurrency(name) {
-        let updatedCurrency = underscore.filter(this.state.currencyData, (index, key) => {
+        const {currencyData, currencyAvalue } = this.state;
+        let updatedCurrency = underscore.filter(currencyData, (index, key) => {
             return  (underscore.indexOf([index.name], name) > -1)
         });
         this.setState({
             secondCurrency: updatedCurrency[0],
+            currencyBvalue:  updatedCurrency[0].sellRate * currencyAvalue || '',
         });
     }
 
+    hanldeInputChange(choice, event) {
+        const { secondCurrency } = this.state;
+        if(choice === 'firstInput') {
+            let inputValue = event.target.value;
+              this.setState({
+                  currencyAvalue: inputValue,
+                  currencyBvalue: inputValue * secondCurrency.sellRate || '',
+              });
+        } else if(choice === 'secondInput') {
+            let inputValue = event.target.value;
+            this.setState({
+                currencyAvalue: inputValue / secondCurrency.sellRate || '',
+                currencyBvalue: inputValue
+            });
+        }
+    }
+
     render() {
-        const { currencyData, firstCurrency, secondCurrency } = this.state;
+        const { currencyData, firstCurrency, secondCurrency, currencyAvalue, currencyBvalue } = this.state;
         return (
             <div className="currencyConverterWrap container">
                 <h1>Select Currency</h1>
@@ -34,7 +53,7 @@ export default class  CurrencyConverter extends React.Component {
                         <h3>{firstCurrency.name}</h3>
                         <div className="input-group">
                             <span className="input-group-addon">$</span>
-                            <input type="number" step="1" className="form-control"/>
+                            <input type="number" value={currencyAvalue} ref='firstInput' step="1" className="form-control" onChange={this.hanldeInputChange.bind(this, 'firstInput')} />
                             <span className="input-group-addon">{firstCurrency.code}</span>
                         </div>
                     </div>
@@ -42,7 +61,7 @@ export default class  CurrencyConverter extends React.Component {
                         <h3>{secondCurrency.name}</h3>
                         <div className="input-group">
                             <span className="input-group-addon">$</span>
-                            <input type="number" step="1" className="form-control" />
+                            <input type="number" value={currencyBvalue} ref='secondInput' step="1" className="form-control" onChange={this.hanldeInputChange.bind(this, 'secondInput')} />
                             <span className="input-group-addon">{secondCurrency.code}</span>
                         </div>
                     </div>

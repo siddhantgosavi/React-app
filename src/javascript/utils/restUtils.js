@@ -1,3 +1,4 @@
+import $ from 'jquery';
 export function fetch (url, successHandler, errorHandler) {
     $.ajax({
         type: 'GET',
