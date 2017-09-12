@@ -5,3 +5,4 @@
 (5) API Calls
 (6)move common strings to messages.js
 (7)read about json methods
+(8)use loadash instead of underscore

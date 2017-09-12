@@ -212,3 +212,10 @@ header {
   display: block;
   cursor: pointer;
 }
+/*curreny converter app*/
+.currencyCalculationWrap {
+	margin-top: 120px;
+}
+.exchangeRateWrap {
+	margin-top: 60px;
+}

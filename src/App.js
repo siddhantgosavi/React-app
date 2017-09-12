@@ -55,12 +55,7 @@ class App extends React.Component {
                 );
             case 'collapseIndex':
             default:
-            return (
-                <div>
-                    <Header headerText="Currency Converter" />
-                    <CurrencyConvertIndex />
-                </div>
-            );
+            return (defaultTemplate);
         }
     }
 
@@ -80,10 +75,10 @@ class App extends React.Component {
                     <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(4)Fetch Data app</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(5)Currency Converter</a></li>
                 </ul>
-                {this.getSubComponent(this.state.stateName)}
+                <div>{this.getSubComponent(this.state.stateName)}</div>
             </div>
         );
-  }
+    }
 }
 
 export default App;

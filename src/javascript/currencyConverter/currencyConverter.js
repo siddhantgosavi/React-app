@@ -9,7 +9,7 @@ export default class  CurrencyConverter extends React.Component {
         this.state = {
             currencyData: currency.currencies,
             firstCurrency: underscore.first(currency.currencies), //return first value
-            secondCurrency: underscore.last(currency.currencies), //return second value from array
+            secondCurrency: underscore.last(currency.currencies), //return last value from array
         };
         this.handleSelectCurrency = this.handleSelectCurrency.bind(this);
     }
@@ -17,29 +17,41 @@ export default class  CurrencyConverter extends React.Component {
     handleSelectCurrency(name) {
         let updatedCurrency = underscore.filter(this.state.currencyData, (index, key) => {
             return  (underscore.indexOf([index.name], name) > -1)
-        }); //return currency with matching name
-        // let object = underscore.object(underscore.map(updatedCurrency, (index, key) => {
-        //     return index;
-        // }));
-        // console.log(object);
+        });
         this.setState({
-            secondCurrency: updatedCurrency,
+            secondCurrency: updatedCurrency[0],
         });
     }
 
     render() {
-  //      console.log(this.state.secondCurrency);
         const { currencyData, firstCurrency, secondCurrency } = this.state;
         return (
-            <div className="currencyConverterWrap">
+            <div className="currencyConverterWrap container">
+                <h1>Select Currency</h1>
                 <SelectCurrency data={currencyData} handleSelectCurrency={this.handleSelectCurrency} />
-                <div>
-                  <p>{firstCurrency.name}</p>
-                  <p>{
-                          underscore.map(secondCurrency, (index, key) => {
-                          return (<p>{index.name}</p>)
-                    })}
-                  </p>
+                <div className="currencyCalculationWrap row">
+                    <div className="col-sm-6 col-md-6">
+                        <h3>{firstCurrency.name}</h3>
+                        <div className="input-group">
+                            <span className="input-group-addon">$</span>
+                            <input type="number" step="1" className="form-control"/>
+                            <span className="input-group-addon">{firstCurrency.code}</span>
+                        </div>
+                    </div>
+                    <div className="col-sm-6 col-md-6">
+                        <h3>{secondCurrency.name}</h3>
+                        <div className="input-group">
+                            <span className="input-group-addon">$</span>
+                            <input type="number" step="1" className="form-control" />
+                            <span className="input-group-addon">{secondCurrency.code}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="row exchangeRateWrap">
+                    <div className="col-sm-12">
+                        <p><strong>Exchange Rate</strong></p>
+                        <span>{firstCurrency.sign} {firstCurrency.sellRate} {firstCurrency.code} = {secondCurrency.sign} {secondCurrency.sellRate} {secondCurrency.code}</span>
+                    </div>
                 </div>
             </div>
           );
