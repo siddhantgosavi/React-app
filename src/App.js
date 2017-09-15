@@ -70,7 +70,7 @@ class App extends React.Component {
             <div className="App">
                 <ul className="stickyLeftlist">
                     <li><a onClick={this.getChoice.bind(this, 'collapseIndex')}>(1)Collapse App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>(2)JSon App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>(2)MDN data fetch App</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>(3)TodoApp</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(4)Fetch Data app</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(5)Currency Converter</a></li>
