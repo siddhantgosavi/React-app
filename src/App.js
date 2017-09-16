@@ -43,14 +43,14 @@ class App extends React.Component {
             case 'fetchDataIndex':
                 return (
                     <div>
-                        <Header headerText="analog Clock APP" />
+                        <Header headerText="fetch data APP" />
                         <FetchDataIndex />
                     </div>
                 );
             case 'clockIndex':
                 return (
                     <div>
-                        <Header headerText="fetch data APP" />
+                        <Header headerText="analog Clock APP" />
                         <ClockIndex />
                     </div>
                 );
