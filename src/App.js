@@ -7,6 +7,7 @@ import JsonIndex from './javascript/containers/jsonIndex.js';
 import TodoIndex from './javascript/containers/todoIndex.js';
 import FetchDataIndex from './javascript/containers/fetchDataIndex.js';
 import CurrencyConvertIndex from './javascript/containers/currencyIndex.js';
+import ClockIndex from './javascript/containers/clockIndex.js';
 
 class App extends React.Component {
 
@@ -46,6 +47,13 @@ class App extends React.Component {
                         <FetchDataIndex />
                     </div>
                 );
+            case 'clockIndex':
+                return (
+                    <div>
+                        <Header headerText="analog Clock APP" />
+                        <ClockIndex />
+                    </div>
+                );
             case 'currencyConvertIndex':
                 return (
                     <div>
@@ -70,10 +78,11 @@ class App extends React.Component {
             <div className="App">
                 <ul className="stickyLeftlist">
                     <li><a onClick={this.getChoice.bind(this, 'collapseIndex')}>(1)Collapse App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>(2)MDN data fetch App</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>(3)TodoApp</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(4)Fetch Data app</a></li>
-                    <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(5)Currency Converter</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'clockIndex')}>(2)Analog Clock</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'jsonIndex')}>(3)MDN data fetch App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'todoIndex')}>(4)TodoApp</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(5)Fetch Data app</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(6)Currency Converter</a></li>
                 </ul>
                 <div>{this.getSubComponent(this.state.stateName)}</div>
             </div>
