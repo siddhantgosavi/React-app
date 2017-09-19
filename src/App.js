@@ -9,6 +9,7 @@ import FetchDataIndex from './javascript/containers/fetchDataIndex.js';
 import CurrencyConvertIndex from './javascript/containers/currencyIndex.js';
 import ClockIndex from './javascript/containers/clockIndex.js';
 import StickyNotesIndex from './javascript/containers/stickyNotesIndex.js';
+import TyperIndex from './javascript/typingTester/index.js';
 
 class App extends React.Component {
 
@@ -63,13 +64,20 @@ class App extends React.Component {
                     </div>
                 );
             case 'stickyNotesIndex':
-            default:
                 return (
                     <div>
                         <Header headerText="sticky notes App" />
                         <StickyNotesIndex />
                     </div>
-                );    
+                );
+            case 'typerIndex':
+            default:
+                return (
+                    <div>
+                        <Header headerText="typing test App" />
+                        <TyperIndex />
+                    </div>
+                );
             case 'collapseIndex':
             return (defaultTemplate);
         }
@@ -93,6 +101,7 @@ class App extends React.Component {
                     <li><a onClick={this.getChoice.bind(this, 'fetchDataIndex')}>(5)Fetch Data app</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'currencyConvertIndex')}>(6)Currency Converter</a></li>
                     <li><a onClick={this.getChoice.bind(this, 'stickyNotesIndex')}>(7)Sticky Notes App</a></li>
+                    <li><a onClick={this.getChoice.bind(this, 'typerIndex')}>(8)Typing Test App</a></li>
                 </ul>
                 <div>{this.getSubComponent(this.state.stateName)}</div>
             </div>
