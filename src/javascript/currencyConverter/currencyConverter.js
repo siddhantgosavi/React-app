@@ -45,7 +45,7 @@ export default class  CurrencyConverter extends React.Component {
     render() {
         const { currencyData, firstCurrency, secondCurrency, currencyAvalue, currencyBvalue } = this.state;
         return (
-            <div className="currencyConverterWrap container">
+            <div className="mainAppWrap container">
                 <h1>Select Currency</h1>
                 <SelectCurrency data={currencyData} handleSelectCurrency={this.handleSelectCurrency} />
                 <div className="currencyCalculationWrap row">
