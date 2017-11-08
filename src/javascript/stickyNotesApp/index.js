@@ -1,7 +1,6 @@
 import React from 'react'
 import Note from './note.js'
 require ('../../stylesheets/stickyNotes.css');
-var underscore = require('underscore');
 
 export default class Board extends React.Component{
 
@@ -23,5 +22,3 @@ export default class Board extends React.Component{
                 )
     }
 }
-
-
