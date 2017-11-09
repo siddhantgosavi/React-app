@@ -73,16 +73,16 @@ class App extends React.Component {
             case 'typerIndex':
             default:
                 return (
-                    <div>
-                        <Header headerText="typing test App" />
-                        <TyperIndex />
-                    </div>
+                  <div>
+                      <Header headerText="session App" />
+                      <StickyNotesIndex />
+                  </div>
                 );
             case 'collapseIndex':
             return (defaultTemplate);
         }
     }
-    
+
 
     getChoice(name) {
         this.setState({

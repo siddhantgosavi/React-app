@@ -1,5 +1,5 @@
 import React from 'react';
-import StickyNotes from '../stickyNotesApp/index.js';
+import StickyNotes from '../stickyNotesApp/index2.js';
 
 const Index = () => {
     return (
