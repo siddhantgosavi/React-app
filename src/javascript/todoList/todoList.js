@@ -23,15 +23,9 @@ export default class TodoList extends React.Component {
 
     handleInputChange(refName) {
         let userInput= this.refs[refName].value;
-        if(userInput) {
-            this.setState({
-                addbuttonStatus: true,
-            });
-        } else {
-            this.setState({
-                addbuttonStatus: false,
-            });
-        }
+        this.setState({
+            addbuttonStatus: !!userInput,
+        });
         this.validateForm(refName);
     }
 
@@ -47,12 +41,11 @@ export default class TodoList extends React.Component {
     addItem(event) {
         event.preventDefault();
         let noteText = this.refs.input.value.toLowerCase() // user input value
-        let result = this.state.oldList; //getting old list
-        let duplicateEntry = underscore.contains(underscore.pluck(result, 'userInput') , noteText); //check for duplicate value
+        let duplicateEntry = underscore.contains(underscore.pluck(this.state.oldList, 'userInput') , noteText); //check for duplicate value
         if(noteText && !duplicateEntry) {
-            result.push({userInput:noteText});
+            var joined = this.state.oldList.concat({userInput:noteText});
             this.setState({
-                oldList: result,
+                oldList: joined,
                 requserrorMsg: false,
             });
         } else {
@@ -63,7 +56,7 @@ export default class TodoList extends React.Component {
           this.refs.input.value="";
     }
 
-    deleteItem (deleteItemId) { //delete item id
+    deleteItem(deleteItemId) { //delete item id
         let result = this.state.oldList;
         result.splice(deleteItemId, 1); //remove id from array
         this.setState({
@@ -80,8 +73,7 @@ export default class TodoList extends React.Component {
     }
 
     searchItem(value) {
-        let result = this.state.oldList;
-        result = underscore.filter(result, (task, key) => {
+        var result = underscore.filter(this.state.oldList, (task, key) => {
             return (task.userInput.toLowerCase().search(value.toLowerCase()) > -1); // return value if its in the list
         });
         if(result) {

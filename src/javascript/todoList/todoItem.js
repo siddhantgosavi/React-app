@@ -25,5 +25,9 @@ export default class TodoItem extends React.Component {
                 </ul>
             </div>
         );
-  }
+    }
 }
+
+TodoItem.defaultProps = {
+    listData: [],
+};
