@@ -1,0 +1,8 @@
+(1) install form validator
+(2) install sass
+(3)implement routing in application
+(4)more common functions in utils files
+(5) API Calls
+(6)move common strings to messages.js
+(7)read about json methods
+(8)use loadash instead of underscore
