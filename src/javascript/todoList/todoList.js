@@ -2,7 +2,7 @@ import React from 'react';
 import TodoItem from './todoItem.js';
 import TodoSearch from './todoSearch.js';
 import '../../stylesheets/todolist.css';
-var underscore = require('underscore');
+import underscore from 'underscore';
 
 export default class TodoList extends React.Component {
     constructor() {
